@@ -1,0 +1,25 @@
+
+Gmail Credentials :
+================
+Gmail- studydevelopment123@gmail.com  
+Password-studydevelopment
+Github Credentials :
+================
+Email- studydevelopment123@gmail.com  
+Password - nBDqjqBcD92cNR7
+=======================================
+Project Name : Attendance Tracker System
+Project Type : Maven
+Language : Java
+Java version : 11
+Spring Boot version : 3.0.1
+Packaging : jar
+=======================================
+Dependencies :
+============
+1. Spring Web
+2. Spring Dev Tools
+3. Lombok
+4. JPA
+5. MySQL connector
+=======================================

@@ -1,0 +1,27 @@
+
+Teams
+======
+A :
+===
+1. Vijay
+2. Sravani
+3. Siri Chandana
+4. Sampath
+B:
+===
+1. Anand
+2. Manmadha
+3. Ashok
+4. Shiva
+C:
+===
+1. Avinash
+2. Eshwar
+3. Bhavya
+4. Ranjith
+
+
+A : manager page
+B : attendance list page
+C: attendance creating page
+
