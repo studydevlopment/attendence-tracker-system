@@ -6,8 +6,16 @@ class Authentication {
         return axios.post(url+"/"+"user"+"/"+"create", product);
     }
 
+    createEmployee(Employees) {
+        return axios.post(url+"/"+"employe"+"/"+"create", Employees);
+    }
+
     getUsersList(){
         return axios.get(url+"/"+"user"+"/"+"all");
+    }
+
+    getEmployeList(){
+        return axios.get(url+"/"+"employe"+"/"+"all");
     }
 
     SendEmail(email){
