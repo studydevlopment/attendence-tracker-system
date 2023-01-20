@@ -49,7 +49,7 @@ function Login() {
         Authentication.getUsersList().then((res)=>{
             setUser(res.data);
         });
-    });
+    },[]);
 
     const showToastMessage = () => {
         toast.success('Login Success !', {
@@ -68,6 +68,10 @@ function Login() {
             }
           });
     };
+
+    const redirecToForgot = () =>{
+        navigate("/forgot");
+    }
 
     const isEnabled = () => {
         return email.length && password.length;
@@ -160,7 +164,7 @@ function Login() {
                         </div>
 
                         <div className="col-12">
-                            <p className="text-center mt-5 fs-4 fw-bold forgotpara">forgot Password?</p>
+                            <p className="text-center mt-5 fs-4 fw-bold forgotpara" onClick={redirecToForgot}>forgot Password?</p>
                         </div>
 
                         <div className="col-12">

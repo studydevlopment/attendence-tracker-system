@@ -31,6 +31,7 @@
 
 .forgotpara{
   color: rgb(217, 240, 224);
+  cursor: pointer;
 }
 .forgotpara:hover{
   color: rgb(105, 105, 235);
@@ -42,4 +43,15 @@
 
 .reqpara{
   color: whitesmoke;
+}
+
+/* .customDatePickerWidth, 
+.customDatePickerWidth > div.react-datepicker-wrapper, 
+.customDatePickerWidth > div > div.react-datepicker__input-container
+.customDatePickerWidth > div > div.react-datepicker__input-container input {
+   width: 500px;
+} */
+
+.modal .modal-dialog {
+  width:52rem;
 }

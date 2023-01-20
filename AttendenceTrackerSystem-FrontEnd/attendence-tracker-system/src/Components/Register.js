@@ -19,6 +19,7 @@ function Register() {
   const [empName, setName] = useState("");
   const [email, setEmail] = useState("");
   const [type, setType] = useState("");
+  const [otp, setotp] = useState("");
   const [password, setPassword] = useState("");
   const [conformPassword, setConformPassword] = useState("");
 
@@ -37,7 +38,7 @@ function Register() {
   const newUser = {
     empName: empName,
     email: email,
-    type:type,
+    type: type,
     password: password,
     conformPassword: conformPassword,
   };
@@ -45,11 +46,21 @@ function Register() {
   const navigate = useNavigate();
 
   const register = () => {
-    Authentication.createProduct(newUser).then((res)=>{
-      console.log("data is:"+res.data);
+    Authentication.createProduct(newUser).then((res) => {
+      console.log("data is:" + res.data);
     });
     navigate("/");
   };
+
+  const emailparameter = {
+    recipient: email
+  };
+
+  const ReqForOtp = () => {
+    Authentication.SendEmail(emailparameter).then((res) => {
+      console.log("request mail is:" + res.data);
+    });
+  }
 
   const isEnabled = () => {
     return email.length && empName.length && password.length && conformPassword;
@@ -88,17 +99,6 @@ function Register() {
               focused
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="col-sm-12 mb-3">
-            <TextField
-              sx={{ width: "38ch", input: { color: "white" } }}
-              style={{ color: "white" }}
-              id="outlined-multiline-flexible"
-              label="Type"
-              focused
-              value={type}
-              onChange={(e) => setType(e.target.value)}
             />
           </div>
           <div className="col-sm-12 mb-3">
@@ -169,21 +169,59 @@ function Register() {
               />
             </FormControl>
           </div>
-          <div className="col-12">
-            <button
-              type="submit"
-              id="start_button"
-              className="btn btn-outline-primary text-light border-light rounded-4 mt-1"
-              style={{ width: "150px", height: "43px" }}
-              onClick={register}
-              disabled={!isEnabled()}
-            >
-              Register
-            </button>
+          <div className="row">
+            {/* <div className="col mt-2">
+              <TextField
+                sx={{ width: "19ch", input: { color: "white" } }}
+                style={{ color: "white" }}
+                id="outlined-multiline-flexible"
+                label="OTP"
+                focused
+                value={otp}
+                onChange={(e) => setotp(e.target.value)}
+              />
+            </div> */}
+            <div className="col mt-2">
+              <TextField
+                sx={{ width: "38ch", input: { color: "white" } }}
+                style={{ color: "white" }}
+                id="outlined-multiline-flexible"
+                label="Type"
+                focused
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="row">
+            {/* <div className="col">
+              <button
+                type="submit"
+                id="start_button"
+                className="btn btn-outline-primary text-light border-light rounded-4 mt-3"
+                style={{ width: "150px", height: "43px" }}
+                onClick={ReqForOtp}
+              >
+                RequestForOtp
+              </button>
+            </div> */}
+            <div className="col">
+              <button
+                type="submit"
+                id="start_button"
+                className="btn btn-outline-primary text-light border-light rounded-4 mt-3"
+                style={{ width: "150px", height: "43px" }}
+                onClick={register}
+                disabled={!isEnabled()}
+              >
+                Register
+              </button>
+            </div>
+          </div>
+          <div>
           </div>
         </div>
       </div>
-      //{" "}
     </div>
   );
 }
