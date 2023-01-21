@@ -46,6 +46,17 @@ function AttandanceDashboard() {
     getAllEmployees();
   }, [])
 
+  const DeleteEmployee = async(employeeId) =>{
+    await Authentication.Deletemp(employeeId).then((res)=>{
+      console.log(res.data);
+    });
+    getAllEmployees();
+  }
+
+  const EditEmployee = (employeeId) =>{
+    navigate(`/edit/${employeeId}`);
+  }
+
   return (
     <div>
       <div className="d-flex justify-content-end">
@@ -110,8 +121,8 @@ function AttandanceDashboard() {
                         <td>{std.workingHours}</td>
                         <td>{std.projectDescrption}</td>
                         <td>
-                          <button className='btn btn-primary'>edit</button>
-                          <button className='btn btn-danger'>delete</button>
+                          <button className='btn btn-primary' onClick={ () => EditEmployee(std.employeeId)}>edit</button>
+                          <button className='btn btn-danger' onClick={ () => DeleteEmployee(std.employeeId)}>delete</button>
                         </td>
                       </tr>
                     );

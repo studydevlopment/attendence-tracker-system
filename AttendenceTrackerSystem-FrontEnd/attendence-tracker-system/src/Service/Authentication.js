@@ -18,6 +18,10 @@ class Authentication {
         return axios.get(url+"/"+"employe"+"/"+"all");
     }
 
+    Deletemp(employeeId){
+        return axios.delete(url+"/"+"employe"+"/"+"delete"+"/"+employeeId);
+    }
+
     SendEmail(email){
         return axios.post(url+"/"+"email"+"/"+"sendMail",email);
     }
