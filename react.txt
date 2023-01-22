@@ -2,6 +2,7 @@ React
 ======
 
 Application name : application-tracker-system
+For installing npm => npm install --force
 
 Dependencies :
 ==============
