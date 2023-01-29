@@ -1,61 +1,87 @@
-import { Stack, TextField } from "@mui/material";
+import {
+  Chip,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Stack,
+  TextField,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import dayjs, { Dayjs } from "dayjs";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Authentication from "../Service/Authentication";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import HomeIcon from "@mui/icons-material/Home";
+import ModeIcon from "@mui/icons-material/Mode";
+import SaveIcon from "@mui/icons-material/Save";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 
-function AttandanceDashboard() {
-  const [timePickerValue, setTimePickerValue] = useState(
-    dayjs('2022-04-07'),
-  );
-
+function AttandanceDashboard(employeeId) {
   const [employeeName, setEmployeeName] = useState();
   const [projectName, setProjectName] = useState();
   const [workingHours, setworkingHours] = useState();
   const [projectDescrption, setProjectDescrption] = useState();
   const [date, setDate] = useState();
   const [emp, setEmp] = useState([]);
+  const [id, setId] = useState("");
 
   const navigate = useNavigate();
+  const params = useParams();
 
   const employeDetails = {
     employeeName: employeeName,
     projectName: projectName,
     workingHours: workingHours,
     projectDescrption: projectDescrption,
-    date: date
+    date: date,
+  };
+
+  const getAllEmployees = () => {
+    Authentication.getEmployeList().then((res) => {
+      setEmp(res.data);
+    });
   };
 
   const saveEmployees = () => {
-    setTimeout(() => {
-      Authentication.createEmployee(employeDetails).then((res) => {
-        console.log(res.data);
-      });
-    }, 500);
-    navigate("/header");
-  }
-
-  const getAllEmployees = async () => {
-    await Authentication.getEmployeList().then((res) => {
-      setEmp(res.data);
-      console.log("Student list is:" + JSON.stringify(emp.data));
+    Authentication.createEmployee(employeDetails).then((res) => {
+      console.log(res.data);
+      getAllEmployees();
     });
-  }
+    navigate("/header");
+  };
+
+ 
 
   useEffect(() => {
     getAllEmployees();
-  }, [])
+  }, []);
 
-  const DeleteEmployee = async(employeeId) =>{
-    await Authentication.Deletemp(employeeId).then((res)=>{
+  const EditEmployee = (employeeId) => {
+    navigate(`/edit/${employeeId}`);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const DeleteEmployee = async () => {
+    await Authentication.Deletemp(id).then((res) => {
       console.log(res.data);
     });
     getAllEmployees();
-  }
+  };
 
-  const EditEmployee = (employeeId) =>{
-    navigate(`/edit/${employeeId}`);
-  }
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = (id) => {
+    setId(id);
+    console.log("id is:" + id);
+    setOpen(true);
+  };
 
   return (
     <div>
@@ -85,14 +111,18 @@ function AttandanceDashboard() {
                       placeholder="Search"
                       aria-label="Search"
                     />
-                    <button
-                      type="button"
-                      className="btn btn-outline-primary"
+                    <Button
+                      size="large"
+                      color="primary"
                       data-bs-toggle="modal"
                       data-bs-target="#staticBackdrop"
+                      className="rounded-pill me-3"
+                      variant="outlined"
+                      sx={{ fontSize: 17, width: 300 }}
+                      startIcon={<AddCircleOutlineOutlinedIcon />}
                     >
-                      +Employees
-                    </button>
+                      Employees
+                    </Button>
                   </form>
                 </div>
               </div>
@@ -110,24 +140,34 @@ function AttandanceDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {
-                  emp.map((std) => {
-                    return (
-                      <tr key={std.employeeId}>
-                        <td>{std.employeeId}</td>
-                        <td>{std.date}</td>
-                        <td>{std.employeeName}</td>
-                        <td>{std.projectName}</td>
-                        <td>{std.workingHours}</td>
-                        <td>{std.projectDescrption}</td>
-                        <td>
-                          <button className='btn btn-primary' onClick={ () => EditEmployee(std.employeeId)}>edit</button>
-                          <button className='btn btn-danger' onClick={ () => DeleteEmployee(std.employeeId)}>delete</button>
-                        </td>
-                      </tr>
-                    );
-                  })
-                }
+                {emp.map((std) => {
+                  return (
+                    <tr key={std.employeeId}>
+                      <td>{std.employeeId}</td>
+                      <td>{std.date}</td>
+                      <td>{std.employeeName}</td>
+                      <td>{std.projectName}</td>
+                      <td>{std.workingHours}</td>
+                      <td>{std.projectDescrption}</td>
+
+                      <td>
+                        <button
+                          className="btn btn-outline-primary me-2"
+                          onClick={() => EditEmployee(std.employeeId)}
+                        >
+                          <ModeIcon />
+                        </button>
+                        <button
+                          className="btn btn-outline-danger ms-2"
+                          //onClick={() => redirecTODelete(std.employeeId)}
+                          onClick={() => handleClickOpen(std.employeeId)}
+                        >
+                          <DeleteForeverOutlinedIcon />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
             <nav className="navbar navbar-expand-lg">
@@ -185,7 +225,7 @@ function AttandanceDashboard() {
                     id="outlined-multiline-flexible"
                     label="Name"
                     value={employeeName}
-                    onChange={e => setEmployeeName(e.target.value)}
+                    onChange={(e) => setEmployeeName(e.target.value)}
                     focused
                   />
                 </div>
@@ -196,7 +236,7 @@ function AttandanceDashboard() {
                     id="outlined-multiline-flexible"
                     label="ProjectName"
                     value={projectName}
-                    onChange={e => setProjectName(e.target.value)}
+                    onChange={(e) => setProjectName(e.target.value)}
                     focused
                   />
                 </div>
@@ -208,14 +248,13 @@ function AttandanceDashboard() {
                     placeholder="HH:MM"
                     label="WorkingHours"
                     value={workingHours}
-                    onChange={e => setworkingHours(e.target.value)}
+                    onChange={(e) => setworkingHours(e.target.value)}
                     focused
                   />
                 </div>
               </div>
 
               <div className="row mt-3">
-
                 <div className="col-sm-4">
                   <TextField
                     sx={{ width: "28ch", input: { color: "black" } }}
@@ -224,7 +263,7 @@ function AttandanceDashboard() {
                     label="ProjectDescrption"
                     focused
                     value={projectDescrption}
-                    onChange={e => setProjectDescrption(e.target.value)}
+                    onChange={(e) => setProjectDescrption(e.target.value)}
                   />
                 </div>
 
@@ -234,7 +273,7 @@ function AttandanceDashboard() {
                       id="date"
                       label="Date"
                       value={date}
-                      onChange={e => setDate(e.target.value)}
+                      onChange={(e) => setDate(e.target.value)}
                       focused
                       type="date"
                       //defaultValue="2017-05-24"
@@ -245,31 +284,76 @@ function AttandanceDashboard() {
                     />
                   </Stack>
                 </div>
-
-
               </div>
             </div>
             <div className="modal-footer d-flex justify-content-center border border-top-0">
-              <button
-                type="button"
-                className="btn btn-outline-secondary"
+              <Button
+                size="large"
+                color="primary"
                 data-bs-dismiss="modal"
-                style={{ width: "150px" }}
+                className="rounded-pill me-3"
+                variant="outlined"
+                sx={{ fontSize: 17, width: 140 }}
+                startIcon={<CancelOutlinedIcon />}
               >
                 Close
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-primary"
-                style={{ width: "150px" }}
+              </Button>
+
+              <Button
+                size="large"
+                color="primary"
+                data-bs-dismiss="modal"
+                className="rounded-pill"
+                variant="outlined"
+                sx={{ fontSize: 17, width: 140 }}
+                startIcon={<SaveIcon />}
                 onClick={saveEmployees}
               >
-                <Link to="/header">Save</Link>
-              </button>
+                Save
+              </Button>
             </div>
           </div>
         </div>
       </div>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title"> </DialogTitle>
+        <DialogContent>
+          <div className="d-flex justify-content-center">
+            <h2 className="text-center">
+              Are you shore Do you want to delete?
+            </h2>
+          </div>
+        </DialogContent>
+        <DialogActions className="d-flex justify-content-center mb-4">
+          <Button
+            size="large"
+            color="primary"
+            className="rounded-pill"
+            variant="outlined"
+            startIcon={<HomeIcon />}
+            onClick={handleClose}
+          >
+            Cancel
+          </Button>
+
+          <Button
+            size="large"
+            color="primary"
+            className="rounded-pill"
+            variant="outlined"
+            startIcon={<DeleteIcon />}
+            onClick={DeleteEmployee}
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

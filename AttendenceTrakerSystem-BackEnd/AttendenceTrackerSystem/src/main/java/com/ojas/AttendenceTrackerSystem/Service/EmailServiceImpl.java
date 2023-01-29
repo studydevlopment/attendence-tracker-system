@@ -64,8 +64,8 @@ public class EmailServiceImpl implements EmailService {
 
 		mailMessage.setFrom(sender);
 		mailMessage.setTo(details.getRecipient());
-		mailMessage.setText("hi these is eshwar");
-		mailMessage.setSubject("Thanks for your time with regisetring from AttendenceTrackerSystem ..");
+		mailMessage.setText(details.getMsgBody());
+		mailMessage.setSubject(details.getSubject());
 //		mailMessage.setText("Your OTP is:" + s);
 
 		javaMailSender.send(mailMessage);

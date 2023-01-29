@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "http://192.168.3.225:8080/springdb";
+const url = "http://localhost:8080/springdb";
 
 class Authentication {
     createProduct(product) {
@@ -24,6 +24,14 @@ class Authentication {
 
     SendEmail(email){
         return axios.post(url+"/"+"email"+"/"+"sendMail",email);
+    }
+
+    getEmployeById(employeeId){
+        return axios.get(url+"/"+"employe"+"/"+"getbyid"+"/"+employeeId);
+    }
+
+    UpdateEmployee(employee){
+        return axios.put(url+"/"+"employe"+"/"+"update",employee);
     }
 }
 export default new Authentication()

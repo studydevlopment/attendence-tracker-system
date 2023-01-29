@@ -1,8 +1,16 @@
 import React from "react";
 import dropdownlogo from "../Images/eshu.jpg";
 import AttandanceDashboard from "./AttandanceDashboard";
+import { useNavigate } from "react-router-dom";
+
 
 function Header() {
+
+  const navigate = useNavigate();
+
+  const logout = () =>{
+    navigate("/");
+  }
   return (
     <div>
       <nav
@@ -16,15 +24,15 @@ function Header() {
               </li>
             </ul>
             <form className="d-flex">
-              <i class="fa fa-bell mt-2 me-3" style={{ fontSize: "12px" }} />
-              <div class="dropdown">
-                <button class="btn btn-outline-light dropdown-toggle border-0 text-dark" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+              <i className="fa fa-bell mt-2 me-3" style={{ fontSize: "12px" }} />
+              <div className="dropdown">
+                <button className="btn btn-outline-light dropdown-toggle border-0 text-dark" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                   <img src={dropdownlogo} alt="Logo" id="headerdropdown" className="rounded-circle me-2" />Laura johnson
                 </button>
-                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
-                  <li><a class="dropdown-item" href="#">Profile</a></li>
-                  <li><a class="dropdown-item" href="#">Settings</a></li>
-                  <li><a class="dropdown-item" href="#">SignOut</a></li>
+                <ul className="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
+                  <li><a className="dropdown-item" href="#">Profile</a></li>
+                  <li><a className="dropdown-item" href="#">Settings</a></li>
+                  <li><a className="dropdown-item" href="#" onClick={logout}>SignOut</a></li>
                 </ul>
               </div>
             </form>
