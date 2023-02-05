@@ -1,0 +1,279 @@
+$color_1: #fff;
+$color_2: grey;
+$color_3: #0070f0;
+$color_4: #248aff;
+$color_5: #282f3d;
+$font-family_1: "Times New Roman", Times, serif;
+$background-color_1: #0045ad;
+$background-color_2: #f3f4f5;
+$background-color_3: #1e242e;
+
+$font-stack: "Helvetica Neue", sans-serif;
+$primary-color: #333;
+
+body {
+  font-family: $font-stack;
+  color: $primary-color;
+ 
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: $primary-color;
+  color: #fff;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+// -----------------------Header------------------------
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background-color: $background-color_1;
+  color: $color_1;
+  display: grid;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.nav-btn-style {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.btn {
+  border-radius: 0% !important;
+}
+@media screen and (max-width: 635px) {
+  .header {
+    height: 120px;
+  }
+  .btn {
+    margin-top: 10px;
+  }
+}
+@media screen and (max-width: 400px) {
+ 
+  .header {
+    height: 220px;
+    position: fixed;
+  }
+  .btn {
+    white-space: nowrap;
+    margin-top: 10px;
+  }
+  .upload-here-style {
+    h1 {
+      padding-top: 103px;
+    }
+  }
+}
+// -----------------------Banner Upload------------------------
+.upload-here-style {
+  background: #0e2866
+    url(//static.mediafire.com/images/backgrounds/home_unicorn/hero_tile.png)
+    center 0;
+  background-size: 467px 711px;
+  color: $color_1;
+  padding: 160px 40px 180px;
+  text-align: center;
+  margin-top: 0px;
+}
+.button-style {
+  padding: 18px 50px !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-top: 120px;
+}
+// -----------------------Companies------------------------
+
+#companies-used {
+  text-align: center;
+  color: $color_2;
+  font-family: $font-family_1;
+  font-size: 30px;
+  margin-top: 20px;
+  border-bottom: 2px #fff;
+}
+img {
+  color: $color_2;
+  margin: 30px;
+}
+// -----------------------Main Features------------------------
+
+.main-features {
+  background-color: $background-color_2;
+  text-align: center;
+  .heading {
+    color: $color_3;
+  }
+}
+.heading {
+  font-size: 44px;
+  font-weight: bold;
+  text-align: center;
+  padding: 80px 40px;
+}
+// -----------------------UserReviews------------------------
+#user-reviews {
+  background-color: $background-color_3 !important;
+  .heading {
+    font-size: 40px;
+    color: $color_4;
+  }
+}
+#heart {
+  padding-top: 30px;
+  padding-bottom: -10px;
+  text-align: center;
+}
+.info-block {
+  text-align: center;
+  .info {
+    display: inline-block;
+    background: #e8e9f3;
+    color: $color_5;
+    padding: 20px 30px 30px;
+    border-radius: 4px;
+    width: 20%;
+    text-align: center;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .info-block {
+    justify-content: center;
+    .info {
+      width: 75%;
+      height: 25%;
+      background: #e8e9f3;
+      color: $color_5;
+
+      border-radius: 4px;
+      text-align: center;
+    }
+  }
+}
+// -----------------------Get Started------------------------
+//done using  banner upload
+// -----------------------Top Features------------------------
+
+.top-features {
+  padding-bottom: 50px;
+  text-align: center;
+  .features {
+    .heading {
+      font-weight: bolder;
+    }
+    .card {
+      border: none;
+    }
+  }
+}
+// -----------------------About us Footer------------------------
+
+#footer {
+  background-color: #1a1e28;
+  padding: 50px 100px;
+  h3 {
+    text-align: center;
+    padding-bottom: 50px;
+    color: grey;
+  }
+  .card {
+    border: none;
+    background-color: #1a1e28;
+    color: grey;
+  }
+  .card-text:last-child {
+    margin-bottom: 0;
+    margin: 0%;
+    width: 159px;
+  }
+  .copyright {
+    padding: 50px 0px 20px 0px;
+    color: grey;
+    font-size: medium;
+  }
+  .recaptcha {
+    color: grey;
+    font-size: smaller;
+  }
+}
+.para {
+  display: inline-block;
+  text-align: center;
+  width: 70%;
+  font-size: 22px;
+  padding-bottom: 80px;
+}
+
+@media screen and (max-width: 775px) {
+  #footer {
+    background-color: #1a1e28;
+    padding: 50px 100px;
+    .contact {
+      display: none;
+    }
+    h3 {
+      text-align: center;
+      padding-bottom: 100px;
+      color: grey;
+    }
+    .card {
+      border: none;
+      background-color: #1a1e28;
+      color: grey;
+    }
+    .card-text:last-child {
+      margin-bottom: 0;
+      margin: 0%;
+      width: 159px;
+    }
+    .copyright {
+      padding: 90px 0px 20px 0px;
+      color: grey;
+      font-size: medium;
+    }
+    .recaptcha {
+      color: grey;
+      font-size: smaller;
+    }
+  }
+}
+@media screen and (min-width: 774px) {
+  .single-card {
+    display: none;
+  }
+}
+//----------------------------------End--------------------------
+.custom-date-picker {
+  height: 40px;
+  width: 200px;
+  background-color: white;
+  color: #212529;
+  border: 1px solid #ced4da;;
+  border-radius: 5px;
+  padding: 10px;
+}
