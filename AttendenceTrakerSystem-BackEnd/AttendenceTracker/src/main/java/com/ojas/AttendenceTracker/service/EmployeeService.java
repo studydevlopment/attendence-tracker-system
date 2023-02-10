@@ -1,9 +1,12 @@
 package com.ojas.AttendenceTracker.service;
 
-import com.ojas.AttendenceTracker.entity.EmployeeEntity;
+import java.util.List;
+
+import com.ojas.AttendenceTracker.entity.EmployeeCredentialsEntity;
 
 public interface EmployeeService {
-    public EmployeeEntity login(String username, String password);
-    public int register(EmployeeEntity employee);
+	public String login(String username, String password);
+	
+	public List<EmployeeCredentialsEntity> viewAllCredentials();
 
 }
